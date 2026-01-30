@@ -8,6 +8,11 @@ Author: Seu Nome
 
 if (!defined('ABSPATH')) exit;
 
+// 🔥 CARREGA O ADMIN APENAS NO PAINEL
+if (is_admin()) {
+    require_once plugin_dir_path(__FILE__) . 'admin.php';
+}
+
 define('MEU_PLUGIN_VERSION', '1.0.4');
 define('MEU_PLUGIN_SLUG', 'meu-plugin');
 define('MEU_PLUGIN_FILE', __FILE__);
