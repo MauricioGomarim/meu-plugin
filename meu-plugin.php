@@ -2,16 +2,16 @@
 /*
 Plugin Name: Meu Plugin
 Description: Plugin com update manual via GitHub
-Version: 1.0.3
+Version: 1.0.4
 Author: Seu Nome
 */
 
 if (!defined('ABSPATH')) exit;
 
-define('MEU_PLUGIN_VERSION', '1.0.0');
+define('MEU_PLUGIN_VERSION', '1.0.4');
 define('MEU_PLUGIN_SLUG', 'meu-plugin');
 define('MEU_PLUGIN_FILE', __FILE__);
-define('MEU_PLUGIN_UPDATE_URL', 'https://raw.githubusercontent.com/SEU-USUARIO/SEU-REPO/main/update.json');
+define('MEU_PLUGIN_UPDATE_URL', 'https://raw.githubusercontent.com/MauricioGomarim/meu-plugin/main/update.json');
 
 /**
  * Verifica atualizações
