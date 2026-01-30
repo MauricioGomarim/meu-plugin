@@ -2,7 +2,7 @@
 /*
 Plugin Name: Meu Plugin
 Description: Plugin com update manual via GitHub
-Version: 1.0.0
+Version: 1.0.4
 Author: Seu Nome
 */
 
