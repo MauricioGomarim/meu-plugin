@@ -2,7 +2,7 @@
 /*
 Plugin Name: Meu Plugin
 Description: Plugin com update manual via GitHub
-Version: 1.0.10
+Version: 1.1.0
 Author: Seu Nome
 */
 
@@ -11,10 +11,36 @@ if (!defined('ABSPATH')) exit;
 // ===============================
 // Constantes
 // ===============================
-define('MEU_PLUGIN_VERSION', '1.0.10');
+define('MEU_PLUGIN_VERSION', '1.1.0');
 define('MEU_PLUGIN_SLUG', 'meu-plugin');
 define('MEU_PLUGIN_FILE', __FILE__);
 define('MEU_PLUGIN_REPO', 'MauricioGomarim/meu-plugin');
+
+
+// ===============================
+// Admin
+// ===============================
+if (is_admin()) {
+    require_once plugin_dir_path(__FILE__) . 'admin/admin-menu.php';
+}
+
+function an7_is_addon_active($addon) {
+    $addons = get_option('an7_addons', []);
+    return !empty($addons[$addon]);
+}
+
+
+add_action('plugins_loaded', function () {
+
+    if (!did_action('elementor/loaded')) {
+        return;
+    }
+
+    if (an7_is_addon_active('widget_exemplo')) {
+        require_once plugin_dir_path(__FILE__) . 'elementor/widgets/exemplo-widget.php';
+    }
+});
+
 
 // ===============================
 // Verifica atualizações via TAG
@@ -91,3 +117,18 @@ add_filter('upgrader_post_install', function ($response, $hook_extra, $result) {
     return $response;
 }, 10, 3);
 
+
+
+
+
+
+add_action('elementor/elements/categories_registered', function ($elements_manager) {
+
+    $elements_manager->add_category(
+        'an7-addons',
+        [
+            'title' => 'An7 Addons',
+            'icon'  => 'fa fa-plug',
+        ]
+    );
+});
