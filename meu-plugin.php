@@ -2,7 +2,7 @@
 /*
 Plugin Name: Meu Plugin
 Description: Plugin com update manual via GitHub
-Version: 1.0.5
+Version: 1.0.10
 Author: Seu Nome
 */
 
@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) exit;
 // ===============================
 // Constantes
 // ===============================
-define('MEU_PLUGIN_VERSION', '1.0.7');
+define('MEU_PLUGIN_VERSION', '1.0.10');
 define('MEU_PLUGIN_SLUG', 'meu-plugin');
 define('MEU_PLUGIN_FILE', __FILE__);
 define('MEU_PLUGIN_REPO', 'MauricioGomarim/meu-plugin');
