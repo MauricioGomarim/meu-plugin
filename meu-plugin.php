@@ -75,7 +75,6 @@ add_filter('upgrader_post_install', function ($response, $hook_extra, $result) {
     $plugins_dir = WP_PLUGIN_DIR;
     $correct_dir = $plugins_dir . '/' . MEU_PLUGIN_SLUG;
 
-    // Se já estiver no lugar certo, ok
     if (is_dir($correct_dir)) {
         return $response;
     }
