@@ -63,25 +63,32 @@ add_filter('pre_set_site_transient_update_plugins', function ($transient) {
     return $transient;
 });
 
-// ===============================
-// Corrige nome da pasta após update
-// ===============================
-add_filter('upgrader_source_selection', function ($source, $remote_source, $upgrader) {
+add_filter('upgrader_post_install', function ($response, $hook_extra, $result) {
 
     if (
-        isset($upgrader->skin->plugin) &&
-        $upgrader->skin->plugin === MEU_PLUGIN_SLUG . '/' . MEU_PLUGIN_SLUG . '.php'
+        empty($hook_extra['plugin']) ||
+        $hook_extra['plugin'] !== MEU_PLUGIN_SLUG . '/' . MEU_PLUGIN_SLUG . '.php'
     ) {
-        $correct_path = trailingslashit($remote_source) . MEU_PLUGIN_SLUG;
-
-        if (file_exists($correct_path)) {
-            return $correct_path;
-        }
-
-        rename($source, $correct_path);
-
-        return $correct_path;
+        return $response;
     }
 
-    return $source;
+    $plugins_dir = WP_PLUGIN_DIR;
+    $correct_dir = $plugins_dir . '/' . MEU_PLUGIN_SLUG;
+
+    // Se já estiver no lugar certo, ok
+    if (is_dir($correct_dir)) {
+        return $response;
+    }
+
+    // Pasta extraída pelo GitHub (ex: meu-plugin-1.0.7)
+    $source = $result['destination'];
+
+    // Move para o nome correto
+    rename($source, $correct_dir);
+
+    // Atualiza referência interna do WP
+    $result['destination'] = $correct_dir;
+
+    return $response;
 }, 10, 3);
+
