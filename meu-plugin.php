@@ -24,10 +24,30 @@ if (is_admin()) {
     require_once plugin_dir_path(__FILE__) . 'admin/admin-menu.php';
 }
 
+
+add_action('admin_enqueue_scripts', 'an7_addons_admin_assets');
+function an7_addons_admin_assets($hook) {
+
+    // slug da sua página
+    if ($hook !== 'toplevel_page_an7-addons') {
+        return;
+    }
+
+    wp_enqueue_style(
+        'an7-addons-admin',
+        plugin_dir_url(__FILE__) . 'admin/admin.css',
+        [],
+        '1.0.0'
+    );
+}
+
+
 function an7_is_addon_active($addon) {
     $addons = get_option('an7_addons', []);
     return !empty($addons[$addon]);
 }
+
+
 
 
 add_action('plugins_loaded', function () {
@@ -36,10 +56,9 @@ add_action('plugins_loaded', function () {
         return;
     }
 
-    if (an7_is_addon_active('widget_exemplo')) {
-        require_once plugin_dir_path(__FILE__) . 'elementor/widgets/exemplo-widget.php';
-    }
+    require_once plugin_dir_path(__FILE__) . 'elementor/widgets-loader.php';
 });
+
 
 
 // ===============================

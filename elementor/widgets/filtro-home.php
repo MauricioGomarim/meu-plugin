@@ -1,14 +1,14 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-class An7_Widget_Exemplo extends \Elementor\Widget_Base {
+class An7_Widget_Filtro_Home extends \Elementor\Widget_Base {
 
     public function get_name() {
-        return 'an7_widget_exemplo';
+        return 'an7_widget_filtro_home';
     }
 
     public function get_title() {
-        return 'An7 – Exemplo';
+        return 'An7 – Filtro Home';
     }
 
     public function get_icon() {
@@ -20,10 +20,10 @@ class An7_Widget_Exemplo extends \Elementor\Widget_Base {
     }
 
     protected function render() {
-        echo '<div>Filtro Exemplo 🚀</div>';
+        echo '<div>Filtro Home funcionando 🚀</div>';
     }
 }
 
 \Elementor\Plugin::instance()->widgets_manager->register(
-    new An7_Widget_Exemplo()
+    new An7_Widget_Filtro_Home()
 );
