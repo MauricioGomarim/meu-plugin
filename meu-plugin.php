@@ -8,7 +8,7 @@ Author: Seu Nome
 
 if (!defined('ABSPATH')) exit;
 
-define('MEU_PLUGIN_VERSION', '1.0.5');
+define('MEU_PLUGIN_VERSION', '1.0.4');
 define('MEU_PLUGIN_SLUG', 'meu-plugin');
 define('MEU_PLUGIN_FILE', __FILE__);
 define('MEU_PLUGIN_UPDATE_URL', 'https://raw.githubusercontent.com/MauricioGomarim/meu-plugin/main/update.json');
@@ -45,3 +45,27 @@ add_filter('pre_set_site_transient_update_plugins', function ($transient) {
 
     return $transient;
 });
+
+
+add_filter('upgrader_source_selection', function ($source, $remote_source, $upgrader) {
+
+    // Garante que é o update do nosso plugin
+    if (
+        isset($upgrader->skin->plugin) &&
+        $upgrader->skin->plugin === MEU_PLUGIN_SLUG . '/' . MEU_PLUGIN_SLUG . '.php'
+    ) {
+        $correct_path = trailingslashit($remote_source) . MEU_PLUGIN_SLUG;
+
+        // Se já estiver correto, não faz nada
+        if (file_exists($correct_path)) {
+            return $correct_path;
+        }
+
+        // Renomeia a pasta baixada do GitHub (ex: meu-plugin-main)
+        rename($source, $correct_path);
+
+        return $correct_path;
+    }
+
+    return $source;
+}, 10, 3);
