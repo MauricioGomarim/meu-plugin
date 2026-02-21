@@ -45,6 +45,10 @@ function an7_addons_page()
                     'widget_filtro_home' => [
                         'title' => 'Filtro home',
                         'desc'  => 'Descrição curta da feature X'
+                    ],
+                    'widget_filtro_loja' => [
+                        'title' => 'Filtro Loja',
+                        'desc'  => 'Descrição curta da feature X'
                     ]
  
                 ];
@@ -71,6 +75,7 @@ function an7_addons_page()
             </div>
 
 
+            
             <?php submit_button(); ?>
         </form>
     </div>

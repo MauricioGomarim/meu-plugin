@@ -10,7 +10,7 @@ add_action('elementor/widgets/register', function ($widgets_manager) {
     $widgets = [
         'widget_exemplo' => 'exemplo-widget.php',
         'widget_filtro_home' => 'filtro-home.php',
-        // 'outro_widget' => 'outro-widget.php',
+        'widget_filtro_loja' => 'filtro-loja.php',
     ];
 
     foreach ($widgets as $key => $file) {

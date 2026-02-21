@@ -16,6 +16,41 @@ define('MEU_PLUGIN_SLUG', 'meu-plugin');
 define('MEU_PLUGIN_FILE', __FILE__);
 define('MEU_PLUGIN_REPO', 'MauricioGomarim/meu-plugin');
 
+add_action('elementor/frontend/after_register_scripts', function () {
+
+    wp_register_script(
+        'an7-filtro-loja',
+        plugin_dir_url(__FILE__) . 'elementor/js/filtro-loja.js',
+        ['jquery'],
+        '1.0',
+        true
+    );
+
+    wp_localize_script(
+        'an7-filtro-loja',
+        'ajax_object',
+        [
+            'ajax_url' => admin_url('admin-ajax.php')
+        ]
+    );
+
+});
+
+
+
+add_action('wp_enqueue_scripts', function () {
+
+    wp_register_style(
+        'an7-filtro-loja',
+        plugin_dir_url(__FILE__) . 'elementor/css/filtro-loja.css',
+        [],
+        '1.0'
+    );
+
+});
+
+
+require_once plugin_dir_path(__FILE__) . 'elementor/includes/ajax/filtro-loja-ajax.php';
 
 // ===============================
 // Admin
