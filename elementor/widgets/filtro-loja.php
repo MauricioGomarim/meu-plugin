@@ -57,8 +57,12 @@ class An7_Widget_Filtro_Loja extends \Elementor\Widget_Base
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .categoria-item' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .breadcrumb-produtos a' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .container-filtro h3' => 'color: {{VALUE}};',                
+                '{{WRAPPER}} .container-filtro h1' => 'color: {{VALUE}};',
                 '{{WRAPPER}} .categoria-atual' => 'color: {{VALUE}};',
                 '{{WRAPPER}} .img-filtro svg path' => 'fill: {{VALUE}};',
+                '{{WRAPPER}} .img-filtro' => 'border-color: {{VALUE}};',  
                 '{{WRAPPER}} .btnCTA a' => 'background: {{VALUE}};',
             ],
         ]
@@ -78,18 +82,90 @@ class An7_Widget_Filtro_Loja extends \Elementor\Widget_Base
         ]
     );
 
-    // Tipografia global
-    $this->add_group_control(
-        \Elementor\Group_Control_Typography::get_type(),
+    $this->end_controls_section();
+
+
+
+        /* =========================
+     * SECTION - BARRA LATERAL
+     ==========================*/
+    $this->start_controls_section(
+        'section_style_lateral',
         [
-            'name' => 'tipografia_global',
-            'label' => 'Tipografia',
-            'selector' => '{{WRAPPER}}',
+            'label' => 'Barra Lateral',
+            'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
         ]
     );
 
-    $this->end_controls_section();
+  
 
+    // Cor dos textos
+    $this->add_control(
+        'cor_texto_lateral',
+        [
+            'label' => 'Cor do titulo',
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .container-filtro h3' => 'color: {{VALUE}};',
+            ],
+        ]
+    );
+
+
+        // Cor dos textos
+$this->add_group_control(
+    \Elementor\Group_Control_Typography::get_type(),
+    [
+        'name' => 'tipografia_texto_lateral',
+        'selector' => '{{WRAPPER}} .container-filtro h3',
+    ]
+);
+
+    // Cor dos textos
+    $this->add_control(
+        'cor_icons',
+        [
+            'label' => 'Cor dos icones',
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .img-filtro svg path' => 'fill: {{VALUE}};',
+                '{{WRAPPER}} .img-filtro' => 'border-color: {{VALUE}};',  
+            ],
+        ]
+    );
+
+
+    $this->add_group_control(
+    \Elementor\Group_Control_Typography::get_type(),
+    [
+        'name' => 'tipografia_texto_icones',
+        'selector' => '{{WRAPPER}} .item label',
+    ]
+);
+
+
+    // Cor dos textos
+    $this->add_control(
+        'cor_categorias',
+        [
+            'label' => 'Cor das categorias',
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .categoria-item label' => 'color: {{VALUE}};'
+            ],
+        ]
+    );
+
+
+    $this->add_group_control(
+    \Elementor\Group_Control_Typography::get_type(),
+    [
+        'name' => 'tipografia_categorias',
+        'selector' => '{{WRAPPER}} .categoria-item label',
+    ]
+);
+    
+    $this->end_controls_section();
 
     /* =========================
      * SECTION - CARD PRODUTO
@@ -227,7 +303,6 @@ class An7_Widget_Filtro_Loja extends \Elementor\Widget_Base
         ?>
 
             <div class="container-filtro">
-                <h1>Filtro de produtos</h1>
                 <h3>Categorias</h3>
                 <div class="filtro-categorias">
                     <?php foreach ($categorias as $categoria) : ?>
@@ -366,7 +441,7 @@ class An7_Widget_Filtro_Loja extends \Elementor\Widget_Base
         <div class='produtos-content-listagem'>
 
             <div class='breadcrumb-produtos'>
-                <a href="<?php echo home_url(); ?>">Home</a> <span>></span>
+                <a href="<?php echo home_url(); ?>">Home</a> <span><svg xmlns="http://www.w3.org/2000/svg" id="Isolation_Mode" data-name="Isolation Mode" viewBox="0 0 24 24" width="15" height="15"><path d="M22.33,9.533,12.8.005,10.68,2.126l9.529,9.528a.49.49,0,0,1,0,.692L10.68,21.874,12.8,24l9.529-9.528A3.493,3.493,0,0,0,22.33,9.533Z"/><path d="M13.8,10.939,2.86.005.739,2.126,10.613,12,.739,21.874,2.86,24,13.8,13.061A1.5,1.5,0,0,0,13.8,10.939Z"/></svg></span>
                 <?php if ($categoria_atual): ?>
                     <span class='categoria-atual'><?php echo esc_html($categoria_atual->name); ?></span>
                 <?php else: ?>

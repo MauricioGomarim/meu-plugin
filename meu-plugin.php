@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) exit;
 // ===============================
 // Constantes
 // ===============================
-define('MEU_PLUGIN_VERSION', '1.1.1');
+define('MEU_PLUGIN_VERSION', '1.1.3');
 define('MEU_PLUGIN_SLUG', 'meu-plugin');
 define('MEU_PLUGIN_FILE', __FILE__);
 define('MEU_PLUGIN_REPO', 'MauricioGomarim/meu-plugin');
